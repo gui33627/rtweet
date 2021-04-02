@@ -46,7 +46,7 @@
 #'
 #' @family tweets
 #' @export
-get_timeline <- function(user,
+get_timeline <- function(user, q,
                          n = 100,
                          max_id = NULL,
                          home = FALSE,
@@ -59,6 +59,7 @@ get_timeline <- function(user,
 
   dots <- list(parse = parse, ...)
   rt <- lapply(user, get_timeline_user, 
+    q = q,
     n = n, 
     max_id = max_id,
     home = home, 
@@ -97,7 +98,7 @@ get_my_timeline <- function(n = 100,
 
 }
 
-get_timeline_user <- function(user,
+get_timeline_user <- function(user, q,
                               n = 200,
                               max_id = NULL,
                               home = FALSE,
@@ -113,6 +114,7 @@ get_timeline_user <- function(user,
   api <- if (home) "/1.1/statuses/home_timeline" else "/1.1/statuses/user_timeline"
 
   params <- list(
+    q = q,
     max_id = max_id,
     tweet_mode = "extended",
     include_ext_alt_text = "true",
@@ -136,7 +138,7 @@ get_timeline_user <- function(user,
 #' @export
 #' @rdname get_timeline
 #' @usage NULL
-get_timelines <- function(user,
+get_timelines <- function(user, q,
                           n = 100,
                           max_id = NULL,
                           home = FALSE,
@@ -147,6 +149,6 @@ get_timelines <- function(user,
   
   lifecycle::deprecate_warn("1.0.0", "get_timelines()", "get_timeline()")
   
-  get_timeline(user, n, max_id = max_id, home = home, parse = parse, token = token, ...)
+  get_timeline(user, q, n, max_id = max_id, home = home, parse = parse, token = token, ...)
 }
 
