@@ -115,7 +115,7 @@ get_timeline_user <- function(user, q,
 
   params <- list(
     q = q,
-    c("mixed", "recent", "popular")
+    type = c("mixed", "recent", "popular"),
     max_id = max_id,
     tweet_mode = "extended",
     include_ext_alt_text = "true",
